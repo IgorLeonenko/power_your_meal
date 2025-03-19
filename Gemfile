@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem "rails", "~> 8.0.0"
 gem "bootsnap", require: false
+gem "httparty"
 gem "kamal", require: false
 gem "importmap-rails"
 gem "pg", "~> 1.5", ">= 1.5.6"

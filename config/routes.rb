@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :meals
+  resources :meals do
+    post :get_random_meal, on: :collection
+  end
+
   resource :registration, only: %i[new create]
   resource :session, only: %i[new create destroy]
   resources :passwords, only: %i[new create edit update], param: :token
