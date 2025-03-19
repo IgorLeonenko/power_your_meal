@@ -1,0 +1,55 @@
+# PostgreSQL. Versions 9.3 and up are supported.
+#
+# Install the pg driver:
+#   gem install pg
+#
+# Configure Using Gemfile
+#   gem "pg"
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= Rails.application.credentials.dig(:postgres, :username) %>
+  password: <%= Rails.application.credentials.dig(:postgres, :password) %>
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: power_your_meal_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: power_your_meal_test
+
+# As with config/credentials.yml, you never want to store sensitive information,
+# like your database password, in your source code. If your source code is
+# ever seen by anyone, they now have access to your database.
+#
+# Instead, provide the password or a full connection URL as an environment
+# variable when you boot the app.
+#
+# For production, you can use environment variables or a dedicated
+# database.yml file that is not checked into version control.
+production:
+  primary:
+    <<: *default
+    database: power_your_meal_production
+  cache:
+    <<: *default
+    database: power_your_meal_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    database: power_your_meal_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    database: power_your_meal_production_cable
+    migrations_paths: db/cable_migrate
