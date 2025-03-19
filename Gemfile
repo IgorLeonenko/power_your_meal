@@ -16,7 +16,7 @@ gem "thruster", require: false
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.7"
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
@@ -27,6 +27,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "letter_opener"
   gem "web-console"
 end
 
