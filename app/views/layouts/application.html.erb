@@ -10,9 +10,6 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -22,6 +19,19 @@
   </head>
 
   <body>
+    <% if Current.user.present? %>
+      <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+          <div class="text-white font-bold text-xl">
+            Power Your Meal
+          </div>
+          <div class="flex space-x-4">
+            <%= link_to 'Profile', root_path, class: "text-gray-300 hover:text-white" %>
+            <%= button_to 'Logout', session_path, method: :delete, class: "text-gray-300 hover:text-white" %>
+          </div>
+        </div>
+      </nav>
+    <% end %>
     <main class="container mx-auto mt-14 px-5 flex">
       <%= yield %>
     </main>

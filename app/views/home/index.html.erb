@@ -1,0 +1,64 @@
+<div class="w-full min-h-screen flex flex-col items-center justify-center">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <section class="py-12 md:py-16 bg-gradient-to-r from-green-50 to-blue-50 rounded-3xl mb-10 px-8 md:px-12">
+      <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-6">
+        Power Your <span class="text-green-600">Meal</span>
+      </h1>
+
+      <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        Discover delicious, random meal recipes for breakfast, lunch, or dinner with just one click!
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <%= link_to "Login", new_session_path, class: "bg-white border-2 border-green-500 text-green-600 hover:bg-green-50 font-semibold py-3 px-8 rounded-lg transition-colors duration-300" %>
+        <%= link_to "Sign Up", new_registration_path, class: "bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" %>
+      </div>
+    </section>
+
+    <section class="py-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8">What You'll Get</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <div class="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Breakfast Ideas</h3>
+          <p class="text-gray-600">Start your day with energy-packed breakfast recipes</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Lunch Inspiration</h3>
+          <p class="text-gray-600">Discover new lunch ideas to fuel your day</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Dinner Solutions</h3>
+          <p class="text-gray-600">End your day with delicious dinner recipes</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-8 mb-10">
+      <div class="bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-xl p-8">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Ready to power up your meals?</h3>
+        <p class="text-gray-600 mb-6">Sign up now to get access to our meal generator and discover new recipes!</p>
+        <a href="<%= new_registration_path %>" class="inline-block bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+          Get Started
+        </a>
+      </div>
+    </section>
+  </div>
+</div>
