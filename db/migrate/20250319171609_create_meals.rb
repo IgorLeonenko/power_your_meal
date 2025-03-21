@@ -6,6 +6,7 @@ class CreateMeals < ActiveRecord::Migration[8.0]
       t.integer :external_id, null: false
       t.text :instructions
       t.jsonb :ingridients, default: {}
+      t.jsonb :measurements, default: {}
       t.timestamps
     end
   end
