@@ -5,6 +5,7 @@ gem "bootsnap", require: false
 gem "httparty"
 gem "kamal", require: false
 gem "importmap-rails"
+gem "pagy", ">= 9.3.0"
 gem "pg", "~> 1.5", ">= 1.5.6"
 gem "propshaft"
 gem "puma", ">= 5.0"
