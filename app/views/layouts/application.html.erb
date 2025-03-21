@@ -16,6 +16,7 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
@@ -26,7 +27,7 @@
             <%= link_to "Power Your Meal", meals_path %>
           </div>
           <div class="flex space-x-4">
-            <%= link_to 'Profile', root_path, class: "text-gray-300 hover:text-white" %>
+            <%= link_to 'My favorites', my_favorites_meals_path, class: "text-gray-300 hover:text-white" %>
             <%= button_to 'Logout', session_path, method: :delete, class: "text-gray-300 hover:text-white" %>
           </div>
         </div>

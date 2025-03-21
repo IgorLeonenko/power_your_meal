@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "meals_list" do %>
+  <%= render partial: "meals/meals_list", locals: { meals: @meals, pagy: @pagy } %>
+<% end %>

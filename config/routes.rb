@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
   resources :meals do
-    post :get_random_meal, on: :collection
+    post :get_random, on: :collection
+    member do
+      post :toggle_favorite
+    end
+    get :my_favorites, on: :collection
   end
 
   resource  :registration, only: %i[new create]

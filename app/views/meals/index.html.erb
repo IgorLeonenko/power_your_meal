@@ -1,19 +1,44 @@
 <div class="w-full">
-  <section class="py-5 bg-gradient-to-r from-green-50 to-blue-50 rounded-3xl">
+  <section class="py-5 bg-gradient-to-r from-green-50 to-blue-50 rounded-3xl ">
     <div class="max-w-5xl mx-auto px-6 text-center">
       <p class="text-xl md:text-2xl text-gray-600 mb-2 max-w-3xl mx-auto">
         Generate or find delicious, random meal recipes for breakfast, lunch, or dinner with just one click!
       </p>
+      <%= button_to get_random_meals_path, method: :post, class: "generate-btn bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mt-6" do %>
+        Surprise me with random receipt
+      <% end %>
+    </div>
   </section>
 
-  <%= button_to get_random_meal_meals_path, method: :post, class: "generate-btn bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mt-6" do %>
-    Surprise me
-  <% end %>
-
   <section class="py-5">
+    <%= form_with url: meals_path, method: :get, data: { turbo_frame: "meals_list", turbo: true, controller: "form" }, class: "flex flex-col items-center mb-6 w-full" do %>
+      <div class="flex flex-wrap justify-center mb-4 w-full" data-controller="category">
+        <% @categories.each do |category| %>
+          <div class="mx-2 mb-6">
+            <%= check_box_tag "categories[]", category.id, params[:categories]&.include?(category.id.to_s), data: { action: "form#submit", form_target: "checkbox" }, id: "category_#{category.id}", class: "hidden peer" %>
+            <%= label_tag "category_#{category.id}", category.name, class: "cursor-pointer border bg-white peer-checked:bg-blue-500 text-gray-800 peer-checked:text-white font-bold py-2 px-4 rounded-full" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="flex items-center bg-white rounded-full shadow-md overflow-hidden w-full mx-auto">
+        <%= text_field_tag :query, params[:query], data: { form_target: "input" }, placeholder: "Search receipt by name", class: "px-6 py-4 outline-none w-full" %>
+        <%= submit_tag "Search", class: "bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-4 px-8 rounded-l-3xl border-l transition-all duration-300 transform hover:scale-105 hover:shadow-lg" %>
+        <%= button_tag "Reset",
+            type: "button",
+            data: { action: "form#reset" },
+            class: "bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-4 px-6 border-l transition-all duration-300" %>
+      </div>
+    <% end %>
+
+    <%= render partial: "meals/meals_list", locals: { meals: @meals, pagy: @pagy } %>
+  </section>
+
+  <section class="py-16 max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Featured Recipes</h2>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <% @meals.each do |meal| %>
-        <%= link_to meal_path(meal) do %>
+      <% @featured_meals.each do |meal| %>
+        <%= link_to meal_path(meal), data: { turbo: false } do %>
           <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
             <%= image_tag meal.image_url, class: "w-full h-48 object-cover" %>
             <div class="p-6">
@@ -23,93 +48,5 @@
           </div>
         <% end %>
       <% end %>
-    </div>
-  </section>
-
-  <section class="py-16 max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Featured Recipes</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-        <div class="h-48 bg-gray-200 relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-yellow-400/70 to-yellow-600/70 flex items-center justify-center text-white font-bold text-xl">
-            Breakfast Recipe
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Avocado Toast with Poached Eggs</h3>
-          <div class="flex items-center mb-4">
-            <span class="text-sm text-gray-500 mr-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              15 mins
-            </span>
-            <span class="text-sm text-gray-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              1 serving
-            </span>
-          </div>
-          <p class="text-gray-600 mb-4">A nutritious breakfast with creamy avocado and perfectly poached eggs on toasted sourdough.</p>
-          <button class="text-green-600 font-medium hover:text-green-700 transition-colors">View Recipe →</button>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-        <div class="h-48 bg-gray-200 relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-green-400/70 to-green-600/70 flex items-center justify-center text-white font-bold text-xl">
-            Lunch Recipe
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Mediterranean Quinoa Bowl</h3>
-          <div class="flex items-center mb-4">
-            <span class="text-sm text-gray-500 mr-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              25 mins
-            </span>
-            <span class="text-sm text-gray-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              2 servings
-            </span>
-          </div>
-          <p class="text-gray-600 mb-4">Protein-packed quinoa with fresh vegetables, feta cheese, and a zesty lemon dressing.</p>
-          <button class="text-green-600 font-medium hover:text-green-700 transition-colors">View Recipe →</button>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-        <div class="h-48 bg-gray-200 relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-blue-400/70 to-blue-600/70 flex items-center justify-center text-white font-bold text-xl">
-            Dinner Recipe
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Herb-Roasted Salmon</h3>
-          <div class="flex items-center mb-4">
-            <span class="text-sm text-gray-500 mr-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              30 mins
-            </span>
-            <span class="text-sm text-gray-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              4 servings
-            </span>
-          </div>
-          <p class="text-gray-600 mb-4">Tender salmon fillets with fresh herbs, roasted vegetables, and a lemon butter sauce.</p>
-          <button class="text-green-600 font-medium hover:text-green-700 transition-colors">View Recipe →</button>
-        </div>
-      </div>
-    </div>
   </section>
 </div>
