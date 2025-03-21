@@ -23,7 +23,7 @@
       <nav class="bg-gray-800 p-4">
         <div class="container mx-auto flex justify-between items-center">
           <div class="text-white font-bold text-xl">
-            Power Your Meal
+            <%= link_to "Power Your Meal", meals_path %>
           </div>
           <div class="flex space-x-4">
             <%= link_to 'Profile', root_path, class: "text-gray-300 hover:text-white" %>
@@ -32,7 +32,8 @@
         </div>
       </nav>
     <% end %>
-    <main class="container mx-auto mt-14 px-5 flex">
+    <main class="container mx-auto mt-14 px-5">
+      <%= render "messages/messages" %>
       <%= yield %>
     </main>
   </body>
