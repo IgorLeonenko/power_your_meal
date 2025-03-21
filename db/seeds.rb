@@ -18,10 +18,12 @@ puts("--seed meals--")
 finished_jobs = 0
 
 Category.all.each do |category|
-  response = ThemealdbClient.filter_by_category(category.name.capitalize)
+  response = ThemealdbClient.filter_by_category(category.name.capitalize)["meals"]
 
   response.first(3).each do |resp|
+    p resp["idMeal"]
     get_meal_response = ThemealdbClient.get_by_id(resp["idMeal"])["meals"][0]
+
 
     Meal.find_or_create_by!(external_id: get_meal_response["idMeal"]) do |meal|
       meal.name = get_meal_response["strMeal"]
@@ -30,7 +32,10 @@ Category.all.each do |category|
       meal.image_url = get_meal_response["strMealThumb"]
       meal.instructions = get_meal_response["strInstructions"]
 
-      ingridients_count = get_meal_response.keys.count { |key| key.start_with?("strIngredient") }
+      ingridients_count = get_meal_response.count do |key, value|
+        key.start_with?("strIngredient") && value.present?
+      end
+
       meal.ingridients = (1..ingridients_count).each_with_object({}) do |i, hash|
         ingredient = get_meal_response["strIngredient#{i}"]
         hash[i] = ingredient
