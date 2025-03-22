@@ -27,9 +27,6 @@ require 'webmock/rspec'
 #
 Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
 
-Capybara.default_driver = :selenium_chrome_headless
-Capybara.javascript_driver = :selenium_chrome_headless
-
 WebMock.disable_net_connect!(allow_localhost: true)
 
 # Checks for pending migrations and applies them before tests are run.
