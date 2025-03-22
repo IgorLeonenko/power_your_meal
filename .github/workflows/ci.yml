@@ -81,10 +81,7 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/power_your_meal_test
         run: |
           bin/rails db:test:prepare
           bundle exec rspec
