@@ -1,6 +1,5 @@
 FactoryBot.define do
-  factory :favorite do
+  factory :session do
     association :user
-    association :meal
   end
 end
