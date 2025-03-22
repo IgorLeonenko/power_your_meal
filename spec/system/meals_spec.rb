@@ -85,17 +85,15 @@ RSpec.describe 'Meals', type: :system do
       within "##{dom_id(meal, :wrapper)}" do
         find("#favorite_#{meal.id}").click
 
-        within "#favorite_#{meal.id}" do
-          expect(page).to have_css('svg[fill="currentColor"]')
-          expect(user.favorite_meals).to include(meal)
-        end
+        # Wait for Turbo frame to update
+        expect(page).to have_css("#favorite_#{meal.id} svg[fill='currentColor']", wait: 5)
+        expect(user.reload.favorite_meals).to include(meal)
 
         find("#favorite_#{meal.id}").click
 
-        within "#favorite_#{meal.id}" do
-          expect(page).to have_css('svg[fill="none"]')
-          expect(user.favorite_meals).not_to include(meal)
-        end
+        # Wait for Turbo frame to update
+        expect(page).to have_css("#favorite_#{meal.id} svg[fill='none']", wait: 5)
+        expect(user.reload.favorite_meals).not_to include(meal)
       end
     end
   end
