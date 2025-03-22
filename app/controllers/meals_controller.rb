@@ -20,7 +20,7 @@ class MealsController < ApplicationController
 
   def show; end
 
-  def get_random_meal
+  def get_random
     meal = Themealdb.new.get_random_meal
     return redirect_to meal_path(meal) if meal
 
@@ -29,7 +29,9 @@ class MealsController < ApplicationController
   end
 
   def toggle_favorite
-    favorite =  Current.user.favorites.find_by(meal: @meal)
+    favorite = Current.user.favorites.find_by(meal: @meal)
+    is_removing = favorite.present?
+
     if favorite
       favorite.destroy
     else
@@ -38,7 +40,13 @@ class MealsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_back(fallback_location: meals_path) }
-      format.turbo_stream
+      format.turbo_stream do
+        if params[:from_favorites].present? && is_removing
+          render turbo_stream: turbo_stream.remove(helpers.dom_id(@meal, :wrapper))
+        else
+          render :toggle_favorite
+        end
+      end
     end
   end
 

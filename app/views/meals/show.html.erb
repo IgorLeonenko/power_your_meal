@@ -17,7 +17,9 @@
     <p class="mb-2 text-lg font-semibold">Ingredients:</p>
     <ul class="flex flex-wrap space-x-2 mb-4">
       <% @meal.ingridients.each do |k, v| %>
-        <li class="border border-green-400 rounded p-2 whitespace-nowrap mb-2"><%= v %></li>
+        <li class="border border-green-400 rounded p-2 whitespace-nowrap mb-2">
+          <%= v %> : <%= @meal.measurements[k] %>
+        </li>
       <% end %>
     </ul>
   </div>

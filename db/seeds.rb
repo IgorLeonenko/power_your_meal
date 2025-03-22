@@ -21,7 +21,6 @@ Category.all.each do |category|
   response = ThemealdbClient.filter_by_category(category.name.capitalize)["meals"]
 
   response.first(3).each do |resp|
-    p resp["idMeal"]
     get_meal_response = ThemealdbClient.get_by_id(resp["idMeal"])["meals"][0]
 
 

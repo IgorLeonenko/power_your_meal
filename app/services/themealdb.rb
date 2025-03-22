@@ -10,7 +10,7 @@ class Themealdb
         meal.image_url = response["strMealThumb"]
         meal.instructions = response["strInstructions"]
 
-        ingridients_count = get_meal_response.count do |key, value|
+        ingridients_count = response.count do |key, value|
           key.start_with?("strIngredient") && value.present?
         end
 
