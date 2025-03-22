@@ -90,14 +90,14 @@ RSpec.describe 'Meals', type: :system do
 
         expect(user.reload.favorite_meals).to include(meal)
         expect(page).to have_no_selector("#favorite_#{meal.id} svg[fill='none']", wait: 5)
-        expect(page).to have_selector("#favorite_#{meal.id} svg[fill='currentColor']", visible: true, wait: 5)
+        expect(page).to have_selector("#favorite_#{meal.id} svg[fill='currentColor']", wait: 5)
 
         find("#favorite_#{meal.id}").click
         sleep(1)
 
         expect(user.reload.favorite_meals).not_to include(meal)
         expect(page).to have_no_selector("#favorite_#{meal.id} svg[fill='currentColor']", wait: 5)
-        expect(page).to have_selector("#favorite_#{meal.id} svg[fill='none']", visible: true, wait: 5)
+        expect(page).to have_selector("#favorite_#{meal.id} svg[fill='none']", wait: 5)
       end
     end
   end
