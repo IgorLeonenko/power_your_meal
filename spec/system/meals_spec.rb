@@ -83,13 +83,19 @@ RSpec.describe 'Meals', type: :system do
   describe 'favorites' do
     it 'allows toggling meal favorites' do
       within "##{dom_id(meal, :wrapper)}" do
-        expect(page).to have_css('svg[fill="none"]')
-        find('button').click
-        expect(page).to have_css('svg[fill="currentColor"]')
-        expect(user.favorite_meals).to include(meal)
-        find('button').click
-        expect(page).to have_css('svg[fill="none"]')
-        expect(user.favorite_meals).not_to include(meal)
+        find("#favorite_#{meal.id}").click
+
+        within "#favorite_#{meal.id}" do
+          expect(page).to have_css('svg[fill="currentColor"]')
+          expect(user.favorite_meals).to include(meal)
+        end
+
+        find("#favorite_#{meal.id}").click
+
+        within "#favorite_#{meal.id}" do
+          expect(page).to have_css('svg[fill="none"]')
+          expect(user.favorite_meals).not_to include(meal)
+        end
       end
     end
   end
