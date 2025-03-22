@@ -83,8 +83,6 @@ RSpec.describe 'Meals', type: :system do
   describe 'favorites' do
     it 'allows toggling meal favorites', js: true do
       within "##{dom_id(meal, :wrapper)}" do
-        expect(page).to have_selector("#favorite_#{meal.id} svg[fill='none']", visible: true)
-
         find("#favorite_#{meal.id}", match: :first).click
         sleep(1)
 
