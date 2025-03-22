@@ -36,17 +36,22 @@
   <section class="py-16 max-w-6xl mx-auto px-6">
     <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Featured Recipes</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
       <% @featured_meals.each do |meal| %>
-        <%= link_to meal_path(meal), data: { turbo: false } do %>
-          <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-            <%= image_tag meal.image_url, class: "w-full h-48 object-cover" %>
-            <div class="p-6">
-              <h4 class="text-xl font-semibold text-gray-800 mb-2"><%= meal.name %></h4>
-              <p class="text-sm text-gray-500 mb-4"><%= meal.category.name %></p>
+        <div class="relative">
+          <%= link_to meal_path(meal), data: { turbo: false } do %>
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+              <%= image_tag meal.image_url, class: "w-full h-48 object-cover" %>
+              <div class="p-6">
+                <h4 class="text-xl font-semibold text-gray-800 mb-2"><%= meal.name %></h4>
+                <p class="text-sm text-gray-500 mb-4"><%= meal.category.name %></p>
+              </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+
+          <%= render "favorite_button", meal: meal %>
+        </div>
       <% end %>
+    </div>
   </section>
 </div>

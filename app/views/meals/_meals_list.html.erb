@@ -2,7 +2,8 @@
   <% if @meals.any? %>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <% @meals.each do |meal| %>
-        <div class="relative">
+        <%= turbo_frame_tag dom_id(meal, :wrapper) do %>
+          <div class="relative">
           <%= link_to meal_path(meal), data: { turbo: false } do %>
             <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
               <%= image_tag meal.image_url, class: "w-full h-48 object-cover" %>
@@ -12,11 +13,14 @@
               </div>
             </div>
           <% end %>
-          <%= render "meals/favorite_button", meal: meal %>
-        </div>
+
+          <%= render "meals/favorite_button", meal: meal, from_favorites: local_assigns[:from_favorites] %>
+          </div>
+        <% end %>
       <% end %>
     </div>
-    <%== pagy_nav(@pagy, link_extra: 'data-turbo-frame="meals_list"') if @meals.size >= 6 %>
+
+    <%== pagy_nav(@pagy, link_extra: 'data-turbo-frame="meals_list"') %>
   <% else %>
     <div class="max-w-5xl mx-auto px-6 text-center">
       <h3 class="text-xl md:text-2xl text-gray-600 mb-2 max-w-3xl mx-auto">No meals found</h3>

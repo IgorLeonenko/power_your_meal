@@ -1,3 +1,3 @@
-<%= turbo_stream.replace "favorite_meal_#{@meal.id}" do %>
-  <%= render "favorite_button", meal: @meal %>
+<%= turbo_stream.replace dom_id(@meal) do %>
+  <%= render "favorite_button", meal: @meal, from_favorites: params[:from_favorites] %>
 <% end %>
