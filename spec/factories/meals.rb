@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :meal do
     sequence(:name) { |n| "Meal #{n}" }
     sequence(:external_id) { |n| "ext_#{n}" }
+    sequence(:image_url) { |n| "https://example.com/meals/#{n}.jpg" }
     category { nil }
 
     trait :with_category do

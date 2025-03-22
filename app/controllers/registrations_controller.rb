@@ -3,6 +3,7 @@ class RegistrationsController < ApplicationController
   resume_session only: %i[new create]
 
   def new
+    return redirect_to root_path, notice: "You are already registered" if Current.session.present?
     @user = User.new
   end
 

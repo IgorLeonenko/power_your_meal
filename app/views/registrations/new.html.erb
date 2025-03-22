@@ -3,20 +3,23 @@
 
   <%= form_with url: registration_url, model: @user, method: :post, class: "contents" do |form| %>
     <div class="my-5">
+      <%= form.label :email_address, "Email address", class: "block text-sm font-medium text-gray-700" %>
       <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "block shadow rounded-md border-2 border-green-500 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
     </div>
 
     <div class="my-5">
+      <%= form.label :password, "Password", class: "block text-sm font-medium text-gray-700" %>
       <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "block shadow rounded-md border-2 border-green-500 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
     </div>
 
     <div class="my-5">
+      <%= form.label :password_confirmation, "Password confirmation", class: "block text-sm font-medium text-gray-700" %>
       <%= form.password_field :password_confirmation, required: true, autocomplete: "current-password", placeholder: "Password confirmation", maxlength: 72, class: "block shadow rounded-md border-2 border-green-500 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
     </div>
 
     <div class="col-span-6 justify-between sm:flex sm:items-center sm:gap-4">
       <div class="flex w-full items-center">
-        <%= form.submit "Sign up", class: "bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 mr-4" %>
+        <%= form.submit "Sign Up", class: "bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 mr-4" %>
         <%= link_to "Back", root_path, class: "bg-gradient-to-r from-blue-300 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg" %>
       </div>
       <div class="mt-4 text-sm w-full text-gray-500 sm:mt-0 text-right">
