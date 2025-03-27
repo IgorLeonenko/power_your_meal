@@ -104,7 +104,7 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
-    csv (3.3.2)
+    csv (3.3.3)
     database_cleaner-active_record (2.2.0)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
@@ -131,7 +131,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashdiff (1.1.2)
-    httparty (0.22.0)
+    httparty (0.23.0)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
