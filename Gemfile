@@ -39,6 +39,6 @@ group :test do
   gem "database_cleaner-active_record"
   gem "factory_bot_rails", "~> 6.4"
   gem "selenium-webdriver"
-  gem "shoulda-matchers", "~> 6.0"
+  gem "shoulda-matchers", "~> 6.5"
   gem "webmock"
 end
