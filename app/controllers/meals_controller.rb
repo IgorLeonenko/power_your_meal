@@ -22,7 +22,7 @@ class MealsController < ApplicationController
 
   def get_random
     meal = Themealdb.new.get_random_meal
-    return redirect_to meal_path(meal) if meal
+    return redirect_to meal_path(meal)
 
     flash[:alert] = "Failed to fetch random meal. Please try again."
     redirect_to meals_path
